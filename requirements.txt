@@ -1,0 +1,10 @@
+pydicom>=3.0
+imagecodecs
+numpy
+# experiments only
+pylibjpeg
+pylibjpeg-libjpeg
+pylibjpeg-openjpeg
+pyjpegls
+nibabel
+TotalSegmentator

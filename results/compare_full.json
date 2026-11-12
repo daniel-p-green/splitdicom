@@ -1,0 +1,44 @@
+{
+ "chest2mm": {
+  "labels": 81,
+  "rand1": {
+   "dice_median": 0.9998,
+   "dice_p5": 0.9986,
+   "dice_min": 0.9954,
+   "worst": "adrenal_gland_left",
+   "below_0.95": 0,
+   "vol_change_max_pct": 0.92,
+   "vol_change_median_pct": 0.012,
+   "voxels_changed_pct": 0.026,
+   "organ_meanHU_shift_max": 0.03,
+   "organ_meanHU_shift_median": 0.003,
+   "rmse_HU": 0.82
+  },
+  "8": {
+   "dice_median": 0.999,
+   "dice_p5": 0.9927,
+   "dice_min": 0.9843,
+   "worst": "common_carotid_artery_right",
+   "below_0.95": 0,
+   "vol_change_max_pct": 3.09,
+   "vol_change_median_pct": 0.049,
+   "voxels_changed_pct": 0.117,
+   "organ_meanHU_shift_max": 0.129,
+   "organ_meanHU_shift_median": 0.016,
+   "rmse_HU": 4.54
+  },
+  "16": {
+   "dice_median": 0.998,
+   "dice_p5": 0.9867,
+   "dice_min": 0.972,
+   "worst": "adrenal_gland_right",
+   "below_0.95": 0,
+   "vol_change_max_pct": 4.43,
+   "vol_change_median_pct": 0.101,
+   "voxels_changed_pct": 0.211,
+   "organ_meanHU_shift_max": 0.719,
+   "organ_meanHU_shift_median": 0.035,
+   "rmse_HU": 8.9
+  }
+ }
+}

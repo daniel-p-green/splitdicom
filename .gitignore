@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.dcm
+*.nii.gz
+*.sdr
+data/
+vols/
+seg*/

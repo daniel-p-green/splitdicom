@@ -1,0 +1,296 @@
+[
+ {
+  "label": "CT chest 2.0mm (uncompressed src)",
+  "slices": 143,
+  "noise_sd": 18.870417248169154,
+  "raw_MB": 74.973184,
+  "JPEG-LS": 2.74210518827646,
+  "JPEG2000": 2.5811396557586903,
+  "HTJ2K": 2.4687996426797256,
+  "JPEG-XL": 2.7892301374659656,
+  "n1": {
+   "base_ratio": 3.485534784875811,
+   "residual_ratio": 12.514993567496385,
+   "total_ratio": 2.7262503119491344,
+   "overhead_vs_best_lossless_pct": 2.3101263020783858,
+   "overhead_vs_jpegls_pct": 0.5815634851221718,
+   "max_err": 1
+  },
+  "n2": {
+   "base_ratio": 3.9828728335515664,
+   "residual_ratio": 8.512911268165528,
+   "total_ratio": 2.7133825895529324,
+   "overhead_vs_best_lossless_pct": 2.795313429262114,
+   "overhead_vs_jpegls_pct": 1.0585532181902835,
+   "max_err": 2
+  },
+  "n3": {
+   "base_ratio": 4.410827383009052,
+   "residual_ratio": 7.029057359716164,
+   "total_ratio": 2.710163552888347,
+   "overhead_vs_best_lossless_pct": 2.9174100763532884,
+   "overhead_vs_jpegls_pct": 1.178587002768583,
+   "max_err": 3
+  },
+  "n5": {
+   "base_ratio": 5.096447654255142,
+   "residual_ratio": 5.588239034096351,
+   "total_ratio": 2.6655126675625045,
+   "overhead_vs_best_lossless_pct": 4.641413691595608,
+   "overhead_vs_jpegls_pct": 2.8734630169286124,
+   "max_err": 5
+  }
+ },
+ {
+  "label": "CT whole-body 5.0mm",
+  "slices": 176,
+  "noise_sd": 10.483565137871752,
+  "raw_MB": 92.274688,
+  "JPEG-LS": 3.068368536531732,
+  "JPEG2000": 2.9740833104548656,
+  "HTJ2K": 2.8349616611423003,
+  "JPEG-XL": 3.133416911774668,
+  "n1": {
+   "base_ratio": 4.020904328516512,
+   "residual_ratio": 12.627949582184863,
+   "total_ratio": 3.049806155284855,
+   "overhead_vs_best_lossless_pct": 2.74151051682181,
+   "overhead_vs_jpegls_pct": 0.608641346424954,
+   "max_err": 1
+  },
+  "n2": {
+   "base_ratio": 4.684446827528568,
+   "residual_ratio": 8.597816319646974,
+   "total_ratio": 3.032315572727398,
+   "overhead_vs_best_lossless_pct": 3.334129862886792,
+   "overhead_vs_jpegls_pct": 1.1889581720515352,
+   "max_err": 2
+  },
+  "n3": {
+   "base_ratio": 5.242946132615991,
+   "residual_ratio": 7.098629004123027,
+   "total_ratio": 3.0156385284444713,
+   "overhead_vs_best_lossless_pct": 3.905586900395175,
+   "overhead_vs_jpegls_pct": 1.7485520094631335,
+   "max_err": 3
+  },
+  "n5": {
+   "base_ratio": 6.201649351948134,
+   "residual_ratio": 5.646912066495911,
+   "total_ratio": 2.9556472993572345,
+   "overhead_vs_best_lossless_pct": 6.01457462316608,
+   "overhead_vs_jpegls_pct": 3.813758062371342,
+   "max_err": 5
+  }
+ },
+ {
+  "label": "CT 3.75mm (PET/CT)",
+  "slices": 136,
+  "noise_sd": 7.338495596510227,
+  "raw_MB": 72.602832,
+  "JPEG-LS": 3.2783262187548976,
+  "JPEG2000": 3.11835459351149,
+  "HTJ2K": 2.9042539620619223,
+  "JPEG-XL": 3.4564478376191774,
+  "n1": {
+   "base_ratio": 4.395955249225803,
+   "residual_ratio": 12.447476526878043,
+   "total_ratio": 3.2486580232167968,
+   "overhead_vs_best_lossless_pct": 6.396173832930208,
+   "overhead_vs_jpegls_pct": 0.9132446482847723,
+   "max_err": 1
+  },
+  "n2": {
+   "base_ratio": 5.18243027654682,
+   "residual_ratio": 8.468452802872724,
+   "total_ratio": 3.214969020376485,
+   "overhead_vs_best_lossless_pct": 7.511077578421399,
+   "overhead_vs_jpegls_pct": 1.9706939002166024,
+   "max_err": 2
+  },
+  "n3": {
+   "base_ratio": 5.826507343319813,
+   "residual_ratio": 6.994348286075797,
+   "total_ratio": 3.1786194953415996,
+   "overhead_vs_best_lossless_pct": 8.74053477255603,
+   "overhead_vs_jpegls_pct": 3.1367933016022365,
+   "max_err": 3
+  },
+  "n5": {
+   "base_ratio": 6.920404158714708,
+   "residual_ratio": 5.563412381282101,
+   "total_ratio": 3.0840778584590915,
+   "overhead_vs_best_lossless_pct": 12.073948721454597,
+   "overhead_vs_jpegls_pct": 6.298425954552878,
+   "max_err": 5
+  }
+ },
+ {
+  "label": "MR MPRAGE 1.33mm",
+  "slices": 128,
+  "noise_sd": 7.338495596510227,
+  "raw_MB": 16.777216,
+  "JPEG-LS": 2.7533400455082173,
+  "JPEG2000": 2.766991080662928,
+  "HTJ2K": 2.656638803750441,
+  "JPEG-XL": 2.901433300319297,
+  "n1": {
+   "base_ratio": 3.779506897505652,
+   "residual_ratio": 9.965930819735817,
+   "total_ratio": 2.740276813884892,
+   "overhead_vs_best_lossless_pct": 5.881029449938424,
+   "overhead_vs_jpegls_pct": 0.47671211744499953,
+   "max_err": 1
+  },
+  "n2": {
+   "base_ratio": 4.52638568021849,
+   "residual_ratio": 6.7566206136094,
+   "total_ratio": 2.710542739734216,
+   "overhead_vs_best_lossless_pct": 7.042521698211579,
+   "overhead_vs_jpegls_pct": 1.5789201604029302,
+   "max_err": 2
+  },
+  "n3": {
+   "base_ratio": 5.219376495219962,
+   "residual_ratio": 5.556567326268014,
+   "total_ratio": 2.6913481897519618,
+   "overhead_vs_best_lossless_pct": 7.805943183691033,
+   "overhead_vs_jpegls_pct": 2.3033755346969498,
+   "max_err": 3
+  },
+  "n5": {
+   "base_ratio": 6.486437500459114,
+   "residual_ratio": 4.429003541150898,
+   "total_ratio": 2.631909654357859,
+   "overhead_vs_best_lossless_pct": 10.240611622635566,
+   "overhead_vs_jpegls_pct": 4.6137750568032265,
+   "max_err": 5
+  }
+ },
+ {
+  "label": "MR T1w 0.67mm",
+  "slices": 384,
+  "noise_sd": 0.0,
+  "raw_MB": 80.805888,
+  "JPEG-LS": 7.957083720736954,
+  "JPEG2000": 8.058059272081188,
+  "HTJ2K": 7.707859087328163,
+  "JPEG-XL": 9.024845779081172,
+  "n1": {
+   "base_ratio": 12.456463439167019,
+   "residual_ratio": 21.071514848077104,
+   "total_ratio": 7.828582805208923,
+   "overhead_vs_best_lossless_pct": 15.280709211842147,
+   "overhead_vs_jpegls_pct": 1.6414326670023849,
+   "max_err": 1
+  },
+  "n2": {
+   "base_ratio": 16.18005648991243,
+   "residual_ratio": 14.49760627514021,
+   "total_ratio": 7.646348103399103,
+   "overhead_vs_best_lossless_pct": 18.0281836118509,
+   "overhead_vs_jpegls_pct": 4.063843460118122,
+   "max_err": 2
+  },
+  "n3": {
+   "base_ratio": 19.480794613856347,
+   "residual_ratio": 12.063435911844207,
+   "total_ratio": 7.450025358665385,
+   "overhead_vs_best_lossless_pct": 21.138457181008906,
+   "overhead_vs_jpegls_pct": 6.806129344000045,
+   "max_err": 3
+  },
+  "n5": {
+   "base_ratio": 24.85470071799629,
+   "residual_ratio": 9.849262175811633,
+   "total_ratio": 7.05396281173865,
+   "overhead_vs_best_lossless_pct": 27.940081624228785,
+   "overhead_vs_jpegls_pct": 12.803029064675542,
+   "max_err": 5
+  }
+ },
+ {
+  "label": "MR T1 3mm 512px",
+  "slices": 20,
+  "noise_sd": 8.386852110297403,
+  "raw_MB": 10.48576,
+  "JPEG-LS": 3.3619346924589752,
+  "JPEG2000": 3.41251908317449,
+  "HTJ2K": 3.2247425774789353,
+  "JPEG-XL": 3.5699035872462392,
+  "n1": {
+   "base_ratio": 4.4819521002311555,
+   "residual_ratio": 13.02201971354875,
+   "total_ratio": 3.33433287172255,
+   "overhead_vs_best_lossless_pct": 7.065002943212173,
+   "overhead_vs_jpegls_pct": 0.8278063948116143,
+   "max_err": 1
+  },
+  "n2": {
+   "base_ratio": 5.275636426572589,
+   "residual_ratio": 8.866700490444783,
+   "total_ratio": 3.3076208242933687,
+   "overhead_vs_best_lossless_pct": 7.9296502497049115,
+   "overhead_vs_jpegls_pct": 1.6420826645753728,
+   "max_err": 2
+  },
+  "n3": {
+   "base_ratio": 5.975118866900981,
+   "residual_ratio": 7.321358874191375,
+   "total_ratio": 3.290043453037053,
+   "overhead_vs_best_lossless_pct": 8.506274710470652,
+   "overhead_vs_jpegls_pct": 2.185115195228171,
+   "max_err": 3
+  },
+  "n5": {
+   "base_ratio": 7.115729270366578,
+   "residual_ratio": 5.8265422131142985,
+   "total_ratio": 3.2034637060273603,
+   "overhead_vs_best_lossless_pct": 11.438864767826695,
+   "overhead_vs_jpegls_pct": 4.946863800374879,
+   "max_err": 5
+  }
+ },
+ {
+  "label": "DX chest radiograph",
+  "slices": 1,
+  "noise_sd": 41.93426055148701,
+  "raw_MB": 5.113224,
+  "JPEG-LS": 2.060380652047859,
+  "JPEG2000": 2.0331023711464,
+  "HTJ2K": 1.922373788888016,
+  "JPEG-XL": 2.0313456310502187,
+  "n1": {
+   "base_ratio": 2.5660602337807807,
+   "residual_ratio": 10.08831873981446,
+   "total_ratio": 2.0457134718313634,
+   "overhead_vs_best_lossless_pct": 0.7169713852138715,
+   "overhead_vs_jpegls_pct": 0.7169713852138715,
+   "max_err": 1
+  },
+  "n2": {
+   "base_ratio": 2.887300275108756,
+   "residual_ratio": 6.839491013278438,
+   "total_ratio": 2.0302341953013237,
+   "overhead_vs_best_lossless_pct": 1.4848758244888849,
+   "overhead_vs_jpegls_pct": 1.4848758244888849,
+   "max_err": 2
+  },
+  "n3": {
+   "base_ratio": 3.1963443374111558,
+   "residual_ratio": 5.615792502646874,
+   "total_ratio": 2.0369641202477236,
+   "overhead_vs_best_lossless_pct": 1.1495799836321208,
+   "overhead_vs_jpegls_pct": 1.1495799836321208,
+   "max_err": 3
+  },
+  "n5": {
+   "base_ratio": 3.618818447026584,
+   "residual_ratio": 4.477962349281525,
+   "total_ratio": 2.0014044053235884,
+   "overhead_vs_best_lossless_pct": 2.946743125347284,
+   "overhead_vs_jpegls_pct": 2.946743125347284,
+   "max_err": 5
+  }
+ }
+]
