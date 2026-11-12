@@ -8,3 +8,6 @@ pylibjpeg-openjpeg
 pyjpegls
 nibabel
 TotalSegmentator
+monai
+scipy
+torch

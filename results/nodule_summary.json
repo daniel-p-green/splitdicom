@@ -1,0 +1,178 @@
+{
+ "scans_used": 39,
+ "scans_skipped": 1,
+ "nodules": 82,
+ "nodules_under_6mm": 36,
+ "diameter_min_median_max": [
+  3.3,
+  6.2,
+  24.8
+ ],
+ "score_threshold": 0.5,
+ "detected_on_original": 79,
+ "false_positives_on_original": 19,
+ "slice_spacing_mm": {
+  "1.25": 10,
+  "0.625": 10,
+  "1.0": 5,
+  "2.5": 11,
+  "0.7": 1,
+  "0.5": 1,
+  "1.8": 1
+ },
+ "manufacturers": {
+  "GE MEDICAL SYSTEMS": 31,
+  "Philips": 2,
+  "SIEMENS": 6
+ },
+ "variants": {
+  "rand1": {
+   "base_ratio_min_median_max": null,
+   "detected": 79,
+   "flips_by_threshold": {
+    "0.3": {
+     "lost": 0,
+     "gained": 0
+    },
+    "0.5": {
+     "lost": 0,
+     "gained": 0
+    },
+    "0.7": {
+     "lost": 0,
+     "gained": 0
+    }
+   },
+   "score_change_abs_median": 1e-05,
+   "score_change_abs_p95": 0.0006,
+   "score_change_abs_max": 0.0018,
+   "det_shift_mm_max": 0.009,
+   "det_box_size_change_pct_abs_max": 0.03,
+   "false_positives": 19,
+   "vol_change_pct_abs_median": 0.0,
+   "vol_change_pct_abs_p95": 0.55,
+   "vol_change_pct_abs_max": 6.25,
+   "vol_change_over_5pct": 1,
+   "vol_change_over_10pct": 0,
+   "vol_measured": 81,
+   "small_nodule_vol_change_pct_abs_median": 0.0,
+   "small_nodule_vol_change_pct_abs_max": 1.67,
+   "mean_hu_shift_abs_median": 0.038,
+   "mean_hu_shift_abs_max": 1.0
+  },
+  "4": {
+   "base_ratio_min_median_max": [
+    3.2,
+    5.29,
+    8.31
+   ],
+   "detected": 80,
+   "flips_by_threshold": {
+    "0.3": {
+     "lost": 0,
+     "gained": 0
+    },
+    "0.5": {
+     "lost": 0,
+     "gained": 1
+    },
+    "0.7": {
+     "lost": 0,
+     "gained": 0
+    }
+   },
+   "score_change_abs_median": 3e-05,
+   "score_change_abs_p95": 0.0012,
+   "score_change_abs_max": 0.0147,
+   "det_shift_mm_max": 0.012,
+   "det_box_size_change_pct_abs_max": 0.37,
+   "false_positives": 19,
+   "vol_change_pct_abs_median": 0.0,
+   "vol_change_pct_abs_p95": 1.45,
+   "vol_change_pct_abs_max": 2.17,
+   "vol_change_over_5pct": 0,
+   "vol_change_over_10pct": 0,
+   "vol_measured": 81,
+   "small_nodule_vol_change_pct_abs_median": 0.0,
+   "small_nodule_vol_change_pct_abs_max": 1.67,
+   "mean_hu_shift_abs_median": 0.107,
+   "mean_hu_shift_abs_max": 1.67
+  },
+  "8": {
+   "base_ratio_min_median_max": [
+    3.74,
+    6.92,
+    11.43
+   ],
+   "detected": 80,
+   "flips_by_threshold": {
+    "0.3": {
+     "lost": 0,
+     "gained": 0
+    },
+    "0.5": {
+     "lost": 0,
+     "gained": 1
+    },
+    "0.7": {
+     "lost": 0,
+     "gained": 0
+    }
+   },
+   "score_change_abs_median": 3e-05,
+   "score_change_abs_p95": 0.003,
+   "score_change_abs_max": 0.0131,
+   "det_shift_mm_max": 0.039,
+   "det_box_size_change_pct_abs_max": 0.19,
+   "false_positives": 19,
+   "vol_change_pct_abs_median": 0.167,
+   "vol_change_pct_abs_p95": 1.85,
+   "vol_change_pct_abs_max": 8.0,
+   "vol_change_over_5pct": 2,
+   "vol_change_over_10pct": 0,
+   "vol_measured": 81,
+   "small_nodule_vol_change_pct_abs_median": 0.187,
+   "small_nodule_vol_change_pct_abs_max": 2.19,
+   "mean_hu_shift_abs_median": 0.212,
+   "mean_hu_shift_abs_max": 1.23
+  },
+  "16": {
+   "base_ratio_min_median_max": [
+    4.53,
+    9.4,
+    15.96
+   ],
+   "detected": 79,
+   "flips_by_threshold": {
+    "0.3": {
+     "lost": 0,
+     "gained": 0
+    },
+    "0.5": {
+     "lost": 0,
+     "gained": 0
+    },
+    "0.7": {
+     "lost": 0,
+     "gained": 0
+    }
+   },
+   "score_change_abs_median": 8e-05,
+   "score_change_abs_p95": 0.0055,
+   "score_change_abs_max": 0.021,
+   "det_shift_mm_max": 0.22,
+   "det_box_size_change_pct_abs_max": 1.65,
+   "false_positives": 18,
+   "vol_change_pct_abs_median": 0.348,
+   "vol_change_pct_abs_p95": 2.63,
+   "vol_change_pct_abs_max": 132.0,
+   "vol_change_over_5pct": 2,
+   "vol_change_over_10pct": 1,
+   "vol_measured": 81,
+   "small_nodule_vol_change_pct_abs_median": 0.205,
+   "small_nodule_vol_change_pct_abs_max": 2.9,
+   "mean_hu_shift_abs_median": 0.543,
+   "mean_hu_shift_abs_max": 3.67
+  }
+ }
+}

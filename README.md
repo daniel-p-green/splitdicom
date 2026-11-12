@@ -12,6 +12,7 @@ Research notes and prototype code on one question: can DICOM medical images be s
 - The prototype in this repo splits each image into two layers: a small base layer with a hard per-pixel error bound, and an exact residual. Together they reproduce the original bit for bit. The base layer can sit in fast storage and the residual in cheap storage.
 - Measured base-layer size on CT: about 4x to 5x at a bound of ±2, and about 6x to 8x at ±8.
 - An open segmentation model produced near-identical results on base layers through ±8. Small structures started to drift at ±16.
+- A lung-nodule detector kept every nodule it found on the originals (79 of 82 annotated) at ±4, ±8, and ±16. Threshold volumetry moved by under 2% for 95% of nodules through ±8. At ±16 one faint nodule's measured volume more than doubled.
 
 Details and limits are in [`notes/`](notes/).
 
@@ -46,12 +47,13 @@ The experiments use public sample data that is not redistributed here:
 
 - [OHIF/viewer-testdata](https://github.com/OHIF/viewer-testdata) (CT, MR, radiograph)
 - [datalad/example-dicom-structural](https://github.com/datalad/example-dicom-structural) (MR)
+- LIDC-IDRI chest CT from The Cancer Imaging Archive (CC BY 3.0), with LUNA16 annotations, for the nodule test in note 04
 
 Clone both into one folder as `ohif/` and `mr/`, then pass that folder to the scripts.
 
 ## Limits
 
-- A handful of public sample series. Too few to generalize.
+- A handful of public sample series plus 39 public chest CTs. Too few to generalize.
 - No radiologist has reviewed any output.
 - Cost figures in the notes use list prices quoted during the investigation and were not re-verified.
 - This repository has no license yet, so default copyright applies.
