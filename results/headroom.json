@@ -1,0 +1,119 @@
+{
+ "CT chest 2.0mm": {
+  "slices": 36,
+  "ratio": {
+   "jpegls": 2.74,
+   "jxl": 2.81,
+   "jxl_interslice": 2.81,
+   "smooth_gauss0.7": 3.58,
+   "smooth_median3": 3.68,
+   "near2_jpegls": 3.98,
+   "near2_quant_jxl": 4.19,
+   "near4_jpegls": 4.77,
+   "near4_quant_jxl": 5.08,
+   "near8_jpegls": 5.99,
+   "near8_quant_jxl": 6.51,
+   "near16_jpegls": 7.98,
+   "near16_quant_jxl": 8.95
+  },
+  "bits_per_pixel": {
+   "jpegls": 5.84,
+   "jxl": 5.7,
+   "jxl_interslice": 5.7,
+   "smooth_gauss0.7": 4.47,
+   "smooth_median3": 4.34,
+   "near2_jpegls": 4.02,
+   "near2_quant_jxl": 3.82,
+   "near4_jpegls": 3.35,
+   "near4_quant_jxl": 3.15,
+   "near8_jpegls": 2.67,
+   "near8_quant_jxl": 2.46,
+   "near16_jpegls": 2.01,
+   "near16_quant_jxl": 1.79
+  },
+  "jxl_gain_over_jpegls_pct": 2.3,
+  "interslice_gain_over_jpegls_pct": 2.3,
+  "share_of_lossless_bits_removed_by_light_smoothing_pct": {
+   "gauss0.7": 21.7,
+   "median3": 23.8
+  }
+ },
+ "CT whole-body 5.0mm": {
+  "slices": 44,
+  "ratio": {
+   "jpegls": 3.05,
+   "jxl": 3.14,
+   "jxl_interslice": 3.14,
+   "smooth_gauss0.7": 4.36,
+   "smooth_median3": 4.35,
+   "near2_jpegls": 4.65,
+   "near2_quant_jxl": 4.94,
+   "near4_jpegls": 5.7,
+   "near4_quant_jxl": 6.2,
+   "near8_jpegls": 7.44,
+   "near8_quant_jxl": 8.38,
+   "near16_jpegls": 10.6,
+   "near16_quant_jxl": 12.21
+  },
+  "bits_per_pixel": {
+   "jpegls": 5.25,
+   "jxl": 5.09,
+   "jxl_interslice": 5.09,
+   "smooth_gauss0.7": 3.67,
+   "smooth_median3": 3.68,
+   "near2_jpegls": 3.44,
+   "near2_quant_jxl": 3.24,
+   "near4_jpegls": 2.81,
+   "near4_quant_jxl": 2.58,
+   "near8_jpegls": 2.15,
+   "near8_quant_jxl": 1.91,
+   "near16_jpegls": 1.51,
+   "near16_quant_jxl": 1.31
+  },
+  "jxl_gain_over_jpegls_pct": 2.9,
+  "interslice_gain_over_jpegls_pct": 2.9,
+  "share_of_lossless_bits_removed_by_light_smoothing_pct": {
+   "gauss0.7": 27.9,
+   "median3": 27.7
+  }
+ },
+ "CT 3.75mm (PET/CT)": {
+  "slices": 34,
+  "ratio": {
+   "jpegls": 3.29,
+   "jxl": 3.53,
+   "jxl_interslice": 3.53,
+   "smooth_gauss0.7": 4.5,
+   "smooth_median3": 4.47,
+   "near2_jpegls": 5.19,
+   "near2_quant_jxl": 5.88,
+   "near4_jpegls": 6.41,
+   "near4_quant_jxl": 7.51,
+   "near8_jpegls": 8.35,
+   "near8_quant_jxl": 10.29,
+   "near16_jpegls": 11.81,
+   "near16_quant_jxl": 14.76
+  },
+  "bits_per_pixel": {
+   "jpegls": 4.86,
+   "jxl": 4.54,
+   "jxl_interslice": 4.54,
+   "smooth_gauss0.7": 3.56,
+   "smooth_median3": 3.58,
+   "near2_jpegls": 3.08,
+   "near2_quant_jxl": 2.72,
+   "near4_jpegls": 2.5,
+   "near4_quant_jxl": 2.13,
+   "near8_jpegls": 1.92,
+   "near8_quant_jxl": 1.56,
+   "near16_jpegls": 1.35,
+   "near16_quant_jxl": 1.08
+  },
+  "jxl_gain_over_jpegls_pct": 6.7,
+  "interslice_gain_over_jpegls_pct": 6.7,
+  "share_of_lossless_bits_removed_by_light_smoothing_pct": {
+   "gauss0.7": 21.6,
+   "median3": 21.0
+  }
+ }
+}
