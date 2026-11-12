@@ -1,0 +1,80 @@
+{
+ "near": 8,
+ "counts": {
+  "discovered": 1311,
+  "selected": 988,
+  "passed": 988
+ },
+ "skip_reasons": {},
+ "failures": [],
+ "per_series": {
+  "CT chest 2.0mm (uncompressed src)": {
+   "pixel_bytes": 74973184,
+   "source_file_bytes": 75278400,
+   "base_file_bytes": 12835920,
+   "residual_file_bytes": 16088704,
+   "base_codestream_bytes": 12518141,
+   "lossless_jpegls_file_bytes_est": 27659248,
+   "images": 143
+  },
+  "CT whole-body 5.0mm": {
+   "pixel_bytes": 92274688,
+   "source_file_bytes": 30322204,
+   "base_file_bytes": 12816856,
+   "residual_file_bytes": 19604881,
+   "base_codestream_bytes": 12320551,
+   "lossless_jpegls_file_bytes_est": 30569188,
+   "images": 176
+  },
+  "CT 3.75mm (PET/CT)": {
+   "pixel_bytes": 72602832,
+   "source_file_bytes": 22915176,
+   "base_file_bytes": 9266766,
+   "residual_file_bytes": 15633467,
+   "base_codestream_bytes": 8693315,
+   "lossless_jpegls_file_bytes_est": 22719762,
+   "images": 136
+  },
+  "MR MPRAGE 1.33mm": {
+   "pixel_bytes": 16777216,
+   "source_file_bytes": 14730778,
+   "base_file_bytes": 10674902,
+   "residual_file_bytes": 4542354,
+   "base_codestream_bytes": 1910671,
+   "lossless_jpegls_file_bytes_est": 14857636,
+   "images": 128
+  },
+  "MR T1w 0.67mm": {
+   "pixel_bytes": 80805888,
+   "source_file_bytes": 81405800,
+   "base_file_bytes": 3156860,
+   "residual_file_bytes": 10173806,
+   "base_codestream_bytes": 2526098,
+   "lossless_jpegls_file_bytes_est": 10785976,
+   "images": 384
+  },
+  "MR T1 3mm 512px": {
+   "pixel_bytes": 10485760,
+   "source_file_bytes": 10677668,
+   "base_file_bytes": 1390908,
+   "residual_file_bytes": 2165300,
+   "base_codestream_bytes": 1200487,
+   "lossless_jpegls_file_bytes_est": 3309387,
+   "images": 20
+  },
+  "DX chest radiograph": {
+   "pixel_bytes": 5113224,
+   "source_file_bytes": 2805016,
+   "base_file_bytes": 1532824,
+   "residual_file_bytes": 1335951,
+   "base_codestream_bytes": 1207909,
+   "lossless_jpegls_file_bytes_est": 2806604,
+   "images": 1
+  }
+ },
+ "seconds": 97.5,
+ "versions": {
+  "pydicom": "3.0.2",
+  "numpy": "2.5.3"
+ }
+}

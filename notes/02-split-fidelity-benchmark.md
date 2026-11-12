@@ -1,12 +1,12 @@
 # 02. Split-fidelity storage: design and measured ratios
 
-Date: 2026-11-11
+Date: 2026-11-11. Corrected 2026-11-12 after an independent review (see note 06). Corrections are marked.
 
 ## Design
 
 Two layers per image, nothing discarded.
 
-- **Base layer.** Encoded with a hard per-pixel error bound: no pixel differs from the original by more than ±N stored units. Uses JPEG-LS near-lossless, which DICOM already defines. The bound is a guarantee from the codec, so the base layer cannot invent structure.
+- **Base layer.** Encoded with a hard per-pixel error bound: no pixel differs from the original by more than ±N stored units. Uses JPEG-LS near-lossless, which DICOM already defines. The bound is a guarantee on per-pixel intensity error. **Correction:** an earlier version said the base layer therefore "cannot invent structure". That overstated it. A bounded intensity error can still change a thresholded region or a faint edge, and note 05 records a case where it did.
 - **Residual layer.** The exact difference between base and original, compressed losslessly.
 - Base plus residual reproduces the original pixels bit for bit, checked by SHA-256.
 
@@ -14,9 +14,11 @@ The intended use is tiering: base layer in fast storage for viewing and AI, resi
 
 ## Round-trip check
 
-`experiments/e2e.py` ran `splitdicom.py` encode, decode, and verify on all 988 sample images (3 CT series, 3 MR series, 1 chest radiograph) at ±2. All 988 restored with identical pixels and matching metadata.
+`experiments/e2e.py` runs `splitdicom.py` encode, decode, and verify on all 988 sample images (3 CT series, 3 MR series, 1 chest radiograph), and opens every base file through pydicom's own JPEG-LS decoder to confirm the bound. With the corrected codec (format version 2), all 988 passed at ±2, ±4, and ±8. Run records: `results/e2e_near2.json`, `results/e2e_near4.json`, `results/e2e_near8.json`.
 
-The verifier ignores retired group-length elements. Those are byte counts that change with the encoding.
+**Correction:** the first version of the checker could not fail. It printed a count and always exited with success. It now exits non-zero on any failure or when no images are selected.
+
+Hashes and comparisons ignore retired group-length elements. Those are byte counts that change with the encoding.
 
 ## Lossless baselines (ratio vs 16-bit uncompressed pixels)
 
@@ -32,7 +34,22 @@ The verifier ignores retired group-length elements. Those are byte counts that c
 
 The MR T1w 0.67 mm series is an outlier, likely because of a blank background.
 
-## Two-layer results on CT
+## Complete files from the shipping tool (added 2026-11-12)
+
+The tables further down are exploratory: they count code-stream bytes only, and one of them picks the best of three residual coders per image. These figures are what `splitdicom.py` writes to disk, headers included, compared with a like-for-like lossless file (the same DICOM header around a lossless JPEG-LS code stream).
+
+CT, three series, 455 images:
+
+| Bound | Base file vs 16-bit pixels | Base file vs lossless file | Residual file vs lossless file | Base + residual vs lossless file |
+|---|---|---|---|---|
+| Lossless JPEG-LS file | 2.71x to 3.20x | 100% | n/a | n/a |
+| ±2 | 3.92x to 4.98x | 64% to 69% | 35% to 42% | +4.6% to +6.1% |
+| ±4 | 4.68x to 6.09x | 52% to 58% | 46% to 55% | +4.4% to +7.5% |
+| ±8 | 5.84x to 7.83x | 41% to 46% | 58% to 69% | +4.6% to +9.6% |
+
+Headers matter for small images. In the MR MPRAGE series each file carries about 67 KB of metadata, which is 70% to 82% of the base file. There the base is only 16% to 28% smaller than a lossless file. The split helps least where pixels are a small share of the file.
+
+## Two-layer results on CT (exploratory, code stream only)
 
 Base coder: uniform quantizer plus JPEG XL lossless. Every fourth slice. Source: `results/sweep.json`.
 
@@ -53,6 +70,13 @@ With the JPEG-LS near-lossless base coder that `splitdicom.py` ships (all slices
 - The residual is the smaller layer at tight bounds and becomes the larger one near ±8.
 
 ## Illustrative monthly cost per 1 TB of uncompressed CT
+
+**Correction: this table does not describe AWS HealthImaging, and the saving it implies is unproven.** Two facts checked on 2026-11-12 against AWS's pricing page and developer guide:
+
+- Both HealthImaging tiers give millisecond access, and data moves to the cheaper tier automatically after 30 days without access. Speed is not a reason to keep a separate base layer there.
+- HealthImaging transcodes JPEG-LS near-lossless files to lossless HTJ2K on import. The base-file sizes measured here are not what it would store or bill.
+
+Read the table only as arithmetic for a generic store with two prices where the base stays at the high price and the residual at the low price. Note 06 gives the comparison that would test whether the split beats ordinary lossless storage with tiering.
 
 Uses AWS HealthImaging list prices quoted during the investigation ($0.105 per GB-month frequent access, $0.006 archive). Not re-verified. Middle CT series.
 

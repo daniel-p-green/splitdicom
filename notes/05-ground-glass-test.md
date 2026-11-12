@@ -17,7 +17,7 @@ Note 04 found no lost nodules through ±16, but the one measurement failure was 
 
 Scripts: `experiments/select_nodules.py`, `experiments/prep_annotations.py`, `experiments/nodule_test.py`, `experiments/nodule_analyze.py`. Output: `results/ggo_raw.jsonl`, `results/ggo_summary.json`.
 
-Base layer size on these scans (median, range): 4.9x (3.3x to 6.7x) at ±4, 6.3x (3.9x to 8.9x) at ±8, 8.8x (4.7x to 13.0x) at ±16.
+Base-layer code-stream ratio for the slices read around these nodules, headers excluded (median, range): 4.9x (3.3x to 6.7x) at ±4, 6.3x (3.9x to 8.9x) at ±8, 8.8x (4.7x to 13.0x) at ±16.
 
 ## Results: non-solid nodules (61)
 
@@ -42,6 +42,8 @@ Base layer size on these scans (median, range): 4.9x (3.3x to 6.7x) at ±4, 6.3x
 Volume figures use the adaptive threshold. Detection uses a score threshold of 0.5.
 
 ## Reading
+
+Scope of every statement below: in this sample, on patches centred on known nodules, under the recorded matching rule.
 
 - **Detection held.** The detector is much less sure of faint nodules (49 of 61 non-solid found on the originals, against 79 of 82 in note 04, and 16 of 95 scores in the uncertain 0.2 to 0.8 range), which makes this a harder test. No nodule was lost or gained at a 0.5 threshold at any bound.
 - **Borderline scores do cross other thresholds.** At a 0.7 threshold one non-solid nodule dropped below the line at ±8. At 0.3, one part-solid nodule dropped and one rose at ±8, and one rose in the control as well. Every score change was 0.03 or less through ±8.

@@ -13,7 +13,7 @@ Extra columns in the annotation CSV are passed through to the output.
 
 usage: nodule_test.py <annotations.csv> <dicom_zip_dir> <model.pt> <selected.txt> <out.jsonl>
 """
-import sys, os, io, csv, json, zipfile, collections, warnings, time
+import sys, os, io, csv, json, hashlib, zipfile, collections, warnings, time
 import numpy as np, pydicom, torch, imagecodecs as ic
 from scipy import ndimage
 warnings.filterwarnings("ignore")
@@ -110,8 +110,8 @@ def detect(det, patch_hu):
     for b, s in zip(box, sc):
         ctr = (b[:3] + b[3:]) / 2 - (np.array(PATCH) - 1) / 2
         size = (b[3:] - b[:3]) * SP
-        res.append([float(ctr[0] * SP[0]), float(ctr[1] * SP[1]), float(ctr[2] * SP[2]), float(s), float((size[0] + size[1]) / 2)])
-    return res  # offsets in mm (R, A, S) from the nodule centre, score, in-plane box size mm
+        res.append([float(ctr[0] * SP[0]), float(ctr[1] * SP[1]), float(ctr[2] * SP[2]), float(s), float((size[0] + size[1]) / 2)] + [float(v) for v in b])
+    return res  # offsets in mm (R, A, S) from the nodule centre, score, in-plane box size mm, then the raw box (x1,y1,z1,x2,y2,z2 in patch voxels)
 
 
 def volumetry(scan, kind, c, r, k, diam, ref_mask=None, thr=THR):
@@ -162,14 +162,28 @@ def main():
     for r in csv.DictReader(open(ann_csv)):
         info = {a: b for a, b in r.items() if a not in ("seriesuid", "coordX", "coordY", "coordZ", "diameter_mm")}
         ann[r["seriesuid"]].append((float(r["coordX"]), float(r["coordY"]), float(r["coordZ"]), float(r["diameter_mm"]), info))
+    # A run is identified by its code, weights, annotations, and settings. Resuming under a different
+    # fingerprint is refused, so one output file never mixes configurations.
+    h = lambda p: hashlib.sha256(open(p, "rb").read()).hexdigest()
+    run = {"code_sha256": h(os.path.abspath(__file__)), "weights_sha256": h(weights), "annotations_sha256": h(ann_csv),
+           "variants": VARIANTS, "patch": list(PATCH), "spacing": [float(x) for x in SP], "threshold_hu": THR,
+           "versions": {"torch": torch.__version__, "monai": __import__("monai").__version__, "numpy": np.__version__, "pydicom": pydicom.__version__}}
+    fingerprint = hashlib.sha256(json.dumps(run, sort_keys=True).encode()).hexdigest()
     done = set()
-    if os.path.exists(out):
-        done = {json.loads(l)["scan"] for l in open(out) if l.strip()}
+    if os.path.exists(out) and os.path.getsize(out):
+        recs = [json.loads(l) for l in open(out) if l.strip()]
+        prior = [r["run"]["fingerprint"] for r in recs if "run" in r]
+        if prior != [fingerprint]:
+            sys.exit("error: output file was produced by a different run configuration (or has no run record); use a new output path")
+        done = {r["scan"] for r in recs if "scan" in r}
     det = build_detector(weights); f = open(out, "a")
+    if not done and not (os.path.exists(out) and os.path.getsize(out)):
+        f.write(json.dumps({"run": dict(run, fingerprint=fingerprint)}) + "\n"); f.flush()
     for si, uid in enumerate([l.strip() for l in open(sel) if l.strip()]):
         if uid in done: continue
         p = os.path.join(zdir, uid + ".zip")
-        if not os.path.exists(p): continue
+        if not os.path.exists(p):
+            f.write(json.dumps({"scan": uid, "skipped": "scan file not found"}) + "\n"); f.flush(); continue
         t = time.time()
         try: scan = Scan(p, si)
         except Exception as e:

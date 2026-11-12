@@ -1,0 +1,8 @@
+-r requirements-dev.txt
+# experiments in experiments/ only; exact versions of the published runs are in results/environment.txt
+pylibjpeg-openjpeg
+nibabel
+scipy
+torch
+monai
+TotalSegmentator

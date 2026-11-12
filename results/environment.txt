@@ -1,0 +1,16 @@
+Python 3.13.18
+imagecodecs==2026.11.11
+monai==1.6.1
+nibabel==5.5.0
+nnunetv2==2.8.1
+numpy==2.5.3
+pydicom==3.0.2
+pyjpegls==1.5.1
+pylibjpeg==2.1.0
+pylibjpeg-libjpeg==2.5.0
+pylibjpeg-openjpeg==2.6.0
+pytest==9.1.1
+scipy==1.18.1
+torch==2.15.0+cpu
+torchvision==0.29.2+cpu
+TotalSegmentator==2.18.0

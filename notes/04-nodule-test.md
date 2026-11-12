@@ -45,15 +45,17 @@ Scripts: `experiments/nodule_test.py`, `experiments/nodule_analyze.py`. Output: 
 
 ## Reading
 
+Scope of every statement below: in this sample, on patches centred on known nodules, under the recorded matching rule.
+
 - Through ±8, this detector's output on annotated nodules is unchanged for practical purposes, and threshold volumetry moves by under 2% for 95% of nodules.
 - ±16 still detects everything here but distorts the measurement of one faint nodule. That fits note 03, where ±16 was the first bound to degrade small structures.
-- Base layers on these scans were smaller than on the note 02 samples: a median of 6.9x at ±8.
+- Base-layer code streams for the slices around these nodules had a median ratio of 6.9x at ±8. That covers only the slices read for each patch and excludes file headers, so it is not a whole-scan or complete-file figure.
 
 ## Limits
 
 - **The model was trained on LUNA16, which includes these scans.** It may be unusually confident on them. A model seeing unfamiliar scans could be more sensitive to the bound.
 - **Patch-based, not whole-scan.** Each run looks at an 80 to 90 mm block around a known nodule. Whole-scan false-positive behaviour was not measured.
-- **Box offset.** With MONAI 1.6.1 this model returns boxes whose midpoint sits about 0.36 x box size past the true centre on each axis (confirmed on synthetic spheres). The cause was not traced. The offset is identical in every variant, so the comparisons above are unaffected. It is corrected only when matching detections to annotations.
+- **Box offset.** With MONAI 1.6.1 this model returns boxes whose midpoint sits about 0.36 x box size past the true centre on each axis (confirmed on synthetic spheres). The cause was not traced. The offset is identical in every variant, so the paired comparisons are unaffected. It is corrected only when matching detections to annotations, and the absolute counts depend on it: without the correction, 69 nodules match on the originals and 30 detections count as false positives, against 79 and 19 with it. Under either rule no previously detected nodule is lost at the 0.5 threshold. The runner now saves all six box coordinates so the transformation can be traced.
 - Solid nodules dominate LUNA16. Ground-glass and part-solid nodules, the low-contrast cases, are under-represented, and the one clear failure here was of that kind.
 - 82 nodules cannot rule out rare failures. Zero lost out of 79 is consistent with a true loss rate of up to roughly 4%.
 - One detector and one measurement method. No radiologist reviewed anything.

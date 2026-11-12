@@ -1,0 +1,6 @@
+-r requirements.txt
+pytest
+# independent JPEG-LS decoders, used by the tests to open base files through pydicom
+pylibjpeg
+pylibjpeg-libjpeg
+pyjpegls
