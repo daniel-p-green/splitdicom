@@ -11,7 +11,7 @@ Note 04 found no lost nodules through ±16, but the one measurement failure was 
 - **Nodule selection:** radiologist texture ratings from the LIDC-IDRI annotations (via the pylidc database). Per-reader annotations were clustered into nodules. Kept: nodules marked by at least two readers, 3 mm or larger, on scans with slices of 2.5 mm or thinner.
   - **Non-solid** (ground-glass): median texture rating 1 or 2.
   - **Part-solid:** median texture rating above 2 and below 4.
-- **Scans:** the first 40 scans (by SHA-1 of series ID) containing a non-solid nodule, plus the first 20 others containing a part-solid nodule. Three were skipped for non-standard orientation, leaving 57 scans and 95 nodules: 61 non-solid, 34 part-solid. Four scanner vendors.
+- **Scans:** the first 40 scans (by SHA-1 of series ID) containing a non-solid nodule, plus the first 20 others containing a part-solid nodule. Three were skipped for non-standard orientation, leaving 57 scans and 95 nodules: 61 non-solid, 34 part-solid. Four scanner vendors. Ten of the 57 scans also appear in note 04, so the two notes cover 86 distinct scans.
 - **Variants, detector, and matching:** same as note 04.
 - **Size:** fixed -400 HU volumetry cannot see ground-glass, which is less dense than that. This note adds an adaptive threshold set half-way between the nodule core and the surrounding lung, measured once on the original and reused for every variant.
 

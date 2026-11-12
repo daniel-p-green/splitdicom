@@ -54,7 +54,7 @@ Clone both into one folder as `ohif/` and `mr/`, then pass that folder to the sc
 
 ## Limits
 
-- A handful of public sample series plus 96 public chest CTs. Too few to generalize.
+- A handful of public sample series plus 86 public chest CTs. Too few to generalize.
 - No radiologist has reviewed any output.
 - Cost figures in the notes use list prices quoted during the investigation and were not re-verified.
 - This repository has no license yet, so default copyright applies.
