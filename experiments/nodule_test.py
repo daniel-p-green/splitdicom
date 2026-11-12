@@ -5,7 +5,11 @@ For each annotated nodule (LUNA16 annotations on LIDC-IDRI scans):
      JPEG-LS near-lossless base layers at several bounds (same codec as splitdicom.py).
   2. Run the MONAI lung_nodule_ct_detection RetinaNet on one 128x128x64 patch
      (90 x 90 x 80 mm) centred on the nodule. Record the matched detection score.
-  3. Measure the nodule with fixed-threshold volumetry (-400 HU) on the native grid.
+  3. Measure the nodule with fixed-threshold volumetry (-400 HU) on the native grid, and with
+     an adaptive threshold half-way between the nodule core and surrounding lung (needed for
+     ground-glass nodules, which sit below -400 HU). The threshold is set on the original.
+
+Extra columns in the annotation CSV are passed through to the output.
 
 usage: nodule_test.py <annotations.csv> <dicom_zip_dir> <model.pt> <selected.txt> <out.jsonl>
 """
@@ -110,7 +114,7 @@ def detect(det, patch_hu):
     return res  # offsets in mm (R, A, S) from the nodule centre, score, in-plane box size mm
 
 
-def volumetry(scan, kind, c, r, k, diam, ref_mask=None):
+def volumetry(scan, kind, c, r, k, diam, ref_mask=None, thr=THR):
     rad = diam * 0.75 + 1.0
     kz = int(np.ceil(rad / scan.dz)) + 1; ry = int(np.ceil(rad / scan.ps_row)) + 1; rx = int(np.ceil(rad / scan.ps_col)) + 1
     kc, rc, cc = int(round(k)), int(round(r)), int(round(c))
@@ -119,7 +123,7 @@ def volumetry(scan, kind, c, r, k, diam, ref_mask=None):
     K, R, C = np.meshgrid(np.arange(k0, k1) - k, np.arange(max(0, rc - ry), max(0, rc - ry) + blk.shape[1]) - r,
                           np.arange(max(0, cc - rx), max(0, cc - rx) + blk.shape[2]) - c, indexing="ij")
     dist = np.sqrt((K * scan.dz) ** 2 + (R * scan.ps_row) ** 2 + (C * scan.ps_col) ** 2)
-    cand = (blk > THR) & (dist <= rad)
+    cand = (blk > thr) & (dist <= rad)
     lab, n = ndimage.label(cand)
     vox = scan.dz * scan.ps_row * scan.ps_col
     if n == 0: return 0.0, None, None
@@ -129,12 +133,35 @@ def volumetry(scan, kind, c, r, k, diam, ref_mask=None):
     return float(mask.sum() * vox), mask, mean_ref
 
 
+def adaptive_threshold(scan, c, r, k, diam):
+    """Half-way threshold between the nodule core and surrounding lung, measured on the original.
+
+    Fixed -400 HU volumetry cannot see ground-glass nodules, which sit well below -400.
+    Returns (threshold, core_mean, background_median) or None when there is no usable contrast.
+    """
+    rout = max(1.5 * diam, 8.0)
+    kz = int(np.ceil(rout / scan.dz)) + 1; ry = int(np.ceil(rout / scan.ps_row)) + 1; rx = int(np.ceil(rout / scan.ps_col)) + 1
+    kc, rc, cc = int(round(k)), int(round(r)), int(round(c))
+    k0, k1 = max(0, kc - kz), min(len(scan.sl), kc + kz + 1); r0, c0 = max(0, rc - ry), max(0, cc - rx)
+    blk = scan.block("orig", k0, k1)[:, r0:rc + ry + 1, c0:cc + rx + 1]
+    K, R, C = np.meshgrid(np.arange(k0, k1) - k, np.arange(r0, r0 + blk.shape[1]) - r, np.arange(c0, c0 + blk.shape[2]) - c, indexing="ij")
+    dist = np.sqrt((K * scan.dz) ** 2 + (R * scan.ps_row) ** 2 + (C * scan.ps_col) ** 2)
+    core = blk[dist <= max(0.3 * diam, 1.0)]
+    if core.size == 0: core = blk[dist <= dist.min() + 1e-6]
+    shell = blk[(dist >= max(diam, 5.0)) & (dist <= rout) & (blk < -500)]
+    if shell.size < 20: return None
+    cm, bg = float(core.mean()), float(np.median(shell))
+    if cm - bg < 60: return None
+    return (cm + bg) / 2, cm, bg
+
+
 def main():
     ann_csv, zdir, weights, sel, out = sys.argv[1:6]
     torch.set_num_threads(2)
     ann = collections.defaultdict(list)
     for r in csv.DictReader(open(ann_csv)):
-        ann[r["seriesuid"]].append((float(r["coordX"]), float(r["coordY"]), float(r["coordZ"]), float(r["diameter_mm"])))
+        info = {a: b for a, b in r.items() if a not in ("seriesuid", "coordX", "coordY", "coordZ", "diameter_mm")}
+        ann[r["seriesuid"]].append((float(r["coordX"]), float(r["coordY"]), float(r["coordZ"]), float(r["diameter_mm"]), info))
     done = set()
     if os.path.exists(out):
         done = {json.loads(l)["scan"] for l in open(out) if l.strip()}
@@ -148,15 +175,21 @@ def main():
         except Exception as e:
             f.write(json.dumps({"scan": uid, "skipped": str(e)}) + "\n"); f.flush(); continue
         nods = []
-        for ni, (x, y, z, d) in enumerate(ann[uid]):
+        for ni, (x, y, z, d, info) in enumerate(ann[uid]):
             c, r, k = scan.world_to_vox(x, y, z)
-            others = [((x2 - x), (y2 - y), (z2 - z), d2) for j, (x2, y2, z2, d2) in enumerate(ann[uid]) if j != ni]
-            rec = {"diameter_mm": d, "others_lps_mm": others, "variants": {}}; ref = None
+            others = [((x2 - x), (y2 - y), (z2 - z), d2) for j, (x2, y2, z2, d2, _) in enumerate(ann[uid]) if j != ni]
+            rec = {"diameter_mm": d, "info": info, "others_lps_mm": others, "variants": {}}; ref = None; aref = None
+            at = adaptive_threshold(scan, c, r, k, d)
+            rec["adaptive"] = {"threshold": at[0], "core_mean": at[1], "background_median": at[2]} if at else None
             for kind in VARIANTS:
                 dets = detect(det, model_patch(scan, kind, c, r, k))
                 vol, mask, mean = volumetry(scan, kind, c, r, k, d, ref)
                 if kind == "orig": ref = mask;
                 rec["variants"][kind] = {"dets": [x_ for x_ in dets if x_[3] >= 0.05], "vol_mm3": vol, "mean_hu_in_orig_mask": mean}
+                if at:
+                    avol, amask, amean = volumetry(scan, kind, c, r, k, d, aref, thr=at[0])
+                    if kind == "orig": aref = amask
+                    rec["variants"][kind].update({"adaptive_vol_mm3": avol, "adaptive_mean_hu_in_orig_mask": amean})
             nods.append(rec)
         ratios = {k: round(scan.bytes["raw" + k] / scan.bytes[k], 2) for k in VARIANTS if scan.bytes[k]}
         f.write(json.dumps({"scan": uid, "meta": scan.meta, "base_ratio": ratios, "nodules": nods, "sec": round(time.time() - t, 1)}) + "\n"); f.flush()

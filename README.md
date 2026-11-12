@@ -13,6 +13,7 @@ Research notes and prototype code on one question: can DICOM medical images be s
 - Measured base-layer size on CT: about 4x to 5x at a bound of ±2, and about 6x to 8x at ±8.
 - An open segmentation model produced near-identical results on base layers through ±8. Small structures started to drift at ±16.
 - A lung-nodule detector kept every nodule it found on the originals (79 of 82 annotated) at ±4, ±8, and ±16. Threshold volumetry moved by under 2% for 95% of nodules through ±8. At ±16 one faint nodule's measured volume more than doubled.
+- On 95 faint nodules (61 ground-glass, 34 part-solid) the detector again lost none at any bound. Measured volume stayed within 5% through ±8 for 94 of 95. One very small nodule's measured volume roughly doubled at ±4 and ±8.
 
 Details and limits are in [`notes/`](notes/).
 
@@ -53,7 +54,7 @@ Clone both into one folder as `ohif/` and `mr/`, then pass that folder to the sc
 
 ## Limits
 
-- A handful of public sample series plus 39 public chest CTs. Too few to generalize.
+- A handful of public sample series plus 96 public chest CTs. Too few to generalize.
 - No radiologist has reviewed any output.
 - Cost figures in the notes use list prices quoted during the investigation and were not re-verified.
 - This repository has no license yet, so default copyright applies.

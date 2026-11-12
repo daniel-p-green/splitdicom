@@ -1,11 +1,10 @@
-"""Summarise nodule_test.py output. usage: nodule_analyze.py <nodules.jsonl> <summary.json>"""
+"""Summarise nodule_test.py output, overall and by radiologist texture group when present.
+usage: nodule_analyze.py <nodules.jsonl> <summary.json>"""
 import sys, json, collections
 import numpy as np
 
 T = 0.5                       # detection score threshold
 VARS = ["rand1", "4", "8", "16"]
-
-
 BOX_OFFSET = 0.36             # see ctr(): calibrated on synthetic spheres
 
 
@@ -39,51 +38,73 @@ def false_pos(dets, d, others):
     return out
 
 
+def pct(a, b): return 100 * (a / b - 1) if b and b > 0 and a is not None else None
+
+
+def group_of(n):
+    t = n.get("info", {}).get("texture_median")
+    if t is None: return "all"
+    return "non-solid" if float(t) <= 2 else "part-solid"
+
+
+def stats(vals):
+    v = np.abs(np.array([x for x in vals if x is not None], float))
+    if len(v) == 0: return None
+    return {"n": int(len(v)), "abs_median": round(float(np.median(v)), 3), "abs_p95": round(float(np.percentile(v, 95)), 2), "abs_max": round(float(v.max()), 2),
+            "over_5": int((v > 5).sum()), "over_10": int((v > 10).sum())}
+
+
+def summarise(rows, used):
+    N = len(rows)
+    out = {"nodules": N, "nodules_under_6mm": sum(r["d"] < 6 for r in rows),
+           "diameter_min_median_max": [round(float(x), 1) for x in (min(r["d"] for r in rows), np.median([r["d"] for r in rows]), max(r["d"] for r in rows))],
+           "detected_on_original": sum(r["orig_score"] >= T for r in rows), "orig_score_between_0.2_and_0.8": sum(0.2 <= r["orig_score"] <= 0.8 for r in rows),
+           "false_positives_on_original": sum(r["fp_orig"] for r in rows), "adaptive_measurable": sum(r["orig_avol"] is not None and r["orig_avol"] > 0 for r in rows), "variants": {}}
+    for k in VARS:
+        sc = np.array([r[k]["score"] - r["orig_score"] for r in rows])
+        sh = [r[k]["shift_mm"] for r in rows if r[k]["shift_mm"] is not None]
+        flips = {str(t): {"lost": int(sum(r["orig_score"] >= t and r[k]["score"] < t for r in rows)), "gained": int(sum(r["orig_score"] < t and r[k]["score"] >= t for r in rows))} for t in (0.3, 0.5, 0.7)}
+        out["variants"][k] = {"detected": int(sum(r[k]["score"] >= T for r in rows)), "flips_by_threshold": flips,
+            "score_change_abs_median": round(float(np.median(np.abs(sc))), 5), "score_change_abs_p95": round(float(np.percentile(np.abs(sc), 95)), 4), "score_change_abs_max": round(float(np.abs(sc).max()), 4),
+            "det_shift_mm_max": round(float(max(sh)), 3) if sh else None, "det_box_size_change_pct": stats([r[k]["box_pct"] for r in rows]),
+            "false_positives": int(sum(r[k]["fp"] for r in rows)),
+            "fixed_threshold_vol_change_pct": stats([r[k]["vol_pct"] for r in rows]), "adaptive_threshold_vol_change_pct": stats([r[k]["avol_pct"] for r in rows]),
+            "adaptive_vol_change_pct_regions_50mm3_plus": stats([r[k]["avol_pct"] for r in rows if r["orig_avol"] and r["orig_avol"] >= 50]),
+            "mean_hu_shift": stats([r[k]["hu_shift"] for r in rows]), "adaptive_mean_hu_shift": stats([r[k]["ahu_shift"] for r in rows])}
+    return out
+
+
 def main():
     scans = [json.loads(l) for l in open(sys.argv[1]) if l.strip()]
     used = [s for s in scans if "nodules" in s]; skipped = [s for s in scans if "skipped" in s]
-    rows = []
+    groups = collections.defaultdict(list)
     for s in used:
         for n in s["nodules"]:
             d = n["diameter_mm"]; v = n["variants"]; o = matched(v["orig"]["dets"], d)
-            r = {"d": d, "orig_score": o[3] if o else 0.0, "orig_vol": v["orig"]["vol_mm3"], "fp_orig": len(false_pos(v["orig"]["dets"], d, n["others_lps_mm"]))}
+            diff = lambda a, b: (a - b) if a is not None and b is not None else None
+            r = {"d": d, "orig_score": o[3] if o else 0.0, "fp_orig": len(false_pos(v["orig"]["dets"], d, n["others_lps_mm"])), "orig_avol": v["orig"].get("adaptive_vol_mm3")}
             for k in VARS:
                 m = matched(v[k]["dets"], d)
                 r[k] = {"score": m[3] if m else 0.0,
                         "shift_mm": float(np.linalg.norm(np.array(m[:3]) - np.array(o[:3]))) if m and o else None,
                         "box_pct": 100 * (m[4] / o[4] - 1) if m and o else None,
-                        "vol_pct": 100 * (v[k]["vol_mm3"] / v["orig"]["vol_mm3"] - 1) if v["orig"]["vol_mm3"] > 0 else None,
-                        "hu_shift": (v[k]["mean_hu_in_orig_mask"] - v["orig"]["mean_hu_in_orig_mask"]) if v["orig"]["mean_hu_in_orig_mask"] is not None and v[k]["mean_hu_in_orig_mask"] is not None else None,
+                        "vol_pct": pct(v[k]["vol_mm3"], v["orig"]["vol_mm3"]), "avol_pct": pct(v[k].get("adaptive_vol_mm3"), v["orig"].get("adaptive_vol_mm3")),
+                        "hu_shift": diff(v[k]["mean_hu_in_orig_mask"], v["orig"]["mean_hu_in_orig_mask"]),
+                        "ahu_shift": diff(v[k].get("adaptive_mean_hu_in_orig_mask"), v["orig"].get("adaptive_mean_hu_in_orig_mask")),
                         "fp": len(false_pos(v[k]["dets"], d, n["others_lps_mm"]))}
-            rows.append(r)
-    N = len(rows); det0 = sum(r["orig_score"] >= T for r in rows)
-    summ = {"scans_used": len(used), "scans_skipped": len(skipped), "nodules": N, "nodules_under_6mm": sum(r["d"] < 6 for r in rows),
-            "diameter_min_median_max": [round(float(x), 1) for x in (min(r["d"] for r in rows), np.median([r["d"] for r in rows]), max(r["d"] for r in rows))],
-            "score_threshold": T, "detected_on_original": det0, "false_positives_on_original": sum(r["fp_orig"] for r in rows),
+            groups[group_of(n)].append(r); 
+            if group_of(n) != "all": groups["all"].append(r)
+    ratios = {k: [s["base_ratio"][k] for s in used if k in s.get("base_ratio", {})] for k in VARS}
+    summ = {"scans_used": len(used), "scans_skipped": len(skipped), "score_threshold": T,
             "slice_spacing_mm": dict(collections.Counter(str(s["meta"]["slice_spacing"]) for s in used)),
-            "manufacturers": dict(collections.Counter(s["meta"]["manufacturer"] for s in used)), "variants": {}}
-    for k in VARS:
-        sc = np.array([r[k]["score"] - r["orig_score"] for r in rows])
-        vol = np.array([r[k]["vol_pct"] for r in rows if r[k]["vol_pct"] is not None])
-        small = np.array([r[k]["vol_pct"] for r in rows if r[k]["vol_pct"] is not None and r["d"] < 6])
-        box = np.array([r[k]["box_pct"] for r in rows if r[k]["box_pct"] is not None])
-        sh = np.array([r[k]["shift_mm"] for r in rows if r[k]["shift_mm"] is not None])
-        hu = np.array([r[k]["hu_shift"] for r in rows if r[k]["hu_shift"] is not None])
-        ratios = [s["base_ratio"][k] for s in used if k in s.get("base_ratio", {})]
-        flips = {str(t): {"lost": int(sum(r["orig_score"] >= t and r[k]["score"] < t for r in rows)), "gained": int(sum(r["orig_score"] < t and r[k]["score"] >= t for r in rows))} for t in (0.3, 0.5, 0.7)}
-        summ["variants"][k] = {
-            "base_ratio_min_median_max": [round(float(x), 2) for x in (min(ratios), np.median(ratios), max(ratios))] if ratios else None,
-            "detected": int(sum(r[k]["score"] >= T for r in rows)), "flips_by_threshold": flips,
-            "score_change_abs_median": round(float(np.median(np.abs(sc))), 5), "score_change_abs_p95": round(float(np.percentile(np.abs(sc), 95)), 4), "score_change_abs_max": round(float(np.abs(sc).max()), 4),
-            "det_shift_mm_max": round(float(sh.max()), 3), "det_box_size_change_pct_abs_max": round(float(np.abs(box).max()), 2),
-            "false_positives": int(sum(r[k]["fp"] for r in rows)),
-            "vol_change_pct_abs_median": round(float(np.median(np.abs(vol))), 3), "vol_change_pct_abs_p95": round(float(np.percentile(np.abs(vol), 95)), 2), "vol_change_pct_abs_max": round(float(np.abs(vol).max()), 2),
-            "vol_change_over_5pct": int((np.abs(vol) > 5).sum()), "vol_change_over_10pct": int((np.abs(vol) > 10).sum()), "vol_measured": int(len(vol)),
-            "small_nodule_vol_change_pct_abs_median": round(float(np.median(np.abs(small))), 3), "small_nodule_vol_change_pct_abs_max": round(float(np.abs(small).max()), 2),
-            "mean_hu_shift_abs_median": round(float(np.median(np.abs(hu))), 3), "mean_hu_shift_abs_max": round(float(np.abs(hu).max()), 2)}
-        print(k, json.dumps(summ["variants"][k]))
-    print({k: v for k, v in summ.items() if k != "variants"})
+            "manufacturers": dict(collections.Counter(s["meta"]["manufacturer"] for s in used)),
+            "base_ratio_min_median_max": {k: [round(float(x), 2) for x in (min(v), np.median(v), max(v))] for k, v in ratios.items() if v},
+            "groups": {g: summarise(rows, used) for g, rows in groups.items()}}
     json.dump(summ, open(sys.argv[2], "w"), indent=1)
+    print({k: v for k, v in summ.items() if k != "groups"})
+    for g, s in summ["groups"].items():
+        print("==", g, {k: v for k, v in s.items() if k != "variants"})
+        for k, v in s["variants"].items(): print("  ", k, json.dumps(v))
 
 
 if __name__ == "__main__":
