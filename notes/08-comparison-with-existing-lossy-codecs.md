@@ -14,7 +14,7 @@ Each codec is given the same number of bytes, then judged on the same tests as n
 - **Lossy JPEG 2000:** irreversible 9/7 wavelet (OpenJPEG).
 - **Lossy HTJ2K** (OpenJPH).
 - **Lossy JPEG XL** (VarDCT). It is tuned for how photographs look on a display, which is not what CT values are.
-- **Size matching:** each lossy codec gets one quality setting per series or scan, tuned so its bytes are at least the bounded-error bytes. Achieved totals are within 0.2%.
+- **Size matching:** each lossy codec gets one quality setting per series or scan, tuned on a sample of slices to match the bounded-error bytes. Achieved totals are within 0.2% of the target.
 
 Scripts: `experiments/compare_lossy.py`, `experiments/nodule_test_lossy.py`. Output: `results/lossy_compare_pixel.json`, `results/lossy_compare_segmentation.json`, `results/lossy_compare_nodules_raw.jsonl`, `results/lossy_compare_nodules_summary.json`.
 
@@ -62,7 +62,7 @@ Pixel error on these same scans still favoured the quantizer: largest error 8 ag
 
 Two more observations support it:
 
-- JPEG-LS near-lossless at the same ±8 bound, which does not snap to a fixed grid, did much better in note 05 on the same nodules: 95th percentile 2.5% and largest 4.3% for the non-solid group, against 7.5% and 9.4% for the quantizer here. Its files are 8% to 19% larger, so that is not an equal-size comparison.
+- JPEG-LS near-lossless at the same ±8 bound, which does not snap to a fixed grid, did much better in note 05 on the same nodules: 95th percentile 2.5% and largest 4.3% for the non-solid group, against 7.5% and 9.4% for the quantizer here. Its files are 9% to 23% larger at that bound, so that is not an equal-size comparison.
 - Mean density inside each nodule moved least with the quantizer (median 0.17 HU against 0.28 and 0.47). Averages are fine. Thresholds are not.
 
 The 100% case is one very small nodule whose measured region disappeared under both the quantizer and JPEG 2000.
