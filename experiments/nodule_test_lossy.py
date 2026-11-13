@@ -10,7 +10,7 @@ bytes are at least the q8 bytes on those slices. Bytes on the tuning slices are 
 
 usage: nodule_test_lossy.py <annotations.csv> <dicom_zip_dir> <model.pt> <selected.txt> <out.jsonl>
 """
-import sys, os, csv, json, hashlib, collections, time, warnings
+import sys, os, gc, csv, json, hashlib, collections, time, warnings
 import numpy as np, torch, imagecodecs as ic
 warnings.filterwarnings("ignore")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -104,6 +104,8 @@ def main():
         errs = {k: {"max_abs_err": scan.err[k], "rmse": round(float(np.sqrt(scan.sq[k] / scan.npx[k])), 3)} for k in VARIANTS[1:] if scan.npx[k]}
         f.write(json.dumps({"scan": uid, "meta": scan.meta, "tuning": scan.tuning, "pixel_error": errs, "clipped": scan.clipped, "nodules": nods, "sec": round(time.time() - t, 1)}) + "\n"); f.flush()
         print(si, uid[-12:], len(nods), "nodules", round(time.time() - t), "s", scan.tuning["bytes"], scan.tuning["q8_bytes"], errs, flush=True)
+        # the codec closures reference the scan, so drop its slice cache explicitly or memory grows scan by scan
+        scan.cache.clear(); scan.sl = None; scan.enc = scan.dec = None; del scan; gc.collect()
 
 
 if __name__ == "__main__":

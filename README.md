@@ -13,6 +13,8 @@ Research notes and prototype code on one question: can DICOM medical images be s
 - Measured on complete files from the shipping tool, a CT base file is about 64% to 69% of the size of a lossless file at a bound of ±2, and 41% to 46% at ±8. The base and residual together take 4% to 10% more space than one lossless file.
 - In the samples tested, an open segmentation model produced near-identical results on base layers through ±8, and a nodule detector kept every detection it made on the original patches at ±4, ±8, and ±16. Threshold-based size measurement of very small nodules was not stable at any bound.
 
+- The only large cut in total bytes comes from keeping one lossy file and discarding the exact original (57% to 66% fewer bytes than lossless at ±8). At the same file size, bounded-error coding has far lower pixel error than lossy JPEG 2000, HTJ2K, or JPEG XL, but it showed no advantage on the downstream tasks tested, and a plain quantizer was worse for threshold-based nodule measurement (note 08).
+
 Details and limits are in [`notes/`](notes/). Note 06 records an independent code review and the fixes that followed.
 
 ## What the codec guarantees

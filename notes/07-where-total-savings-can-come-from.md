@@ -36,7 +36,7 @@ Coder: uniform quantizer (step 2N + 1) followed by lossless JPEG XL. Every pixel
 | ±8 | 6.51x to 10.29x | 57% to 66% |
 | ±16 | 8.95x to 14.76x | 69% to 76% |
 
-The quantizer plus JPEG XL coder is 5% to 19% smaller than JPEG-LS near-lossless at the same bound, and the gap widens as the bound grows.
+The quantizer plus JPEG XL coder is 5% to 19% smaller than JPEG-LS near-lossless at the same bound, and the gap widens as the bound grows. Smaller is not the whole story: note 08 found that this quantizer distorts threshold-based measurements more than JPEG-LS near-lossless or lossy JPEG 2000 do.
 
 ## 3. What that is worth
 

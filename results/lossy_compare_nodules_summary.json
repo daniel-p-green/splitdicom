@@ -1,0 +1,698 @@
+{
+ "scans_used": 57,
+ "scans_skipped": 3,
+ "score_threshold": 0.5,
+ "slice_spacing_mm": {
+  "2.5": 10,
+  "1.25": 18,
+  "0.625": 12,
+  "1.8": 5,
+  "1.0": 8,
+  "0.7": 1,
+  "2.0": 3
+ },
+ "manufacturers": {
+  "GE MEDICAL SYSTEMS": 42,
+  "SIEMENS": 10,
+  "Philips": 4,
+  "TOSHIBA": 1
+ },
+ "base_ratio_min_median_max": {},
+ "groups": {
+  "non-solid": {
+   "nodules": 61,
+   "nodules_under_6mm": 19,
+   "diameter_min_median_max": [
+    3.4,
+    6.9,
+    14.3
+   ],
+   "detected_on_original": 49,
+   "orig_score_between_0.2_and_0.8": 11,
+   "false_positives_on_original": 15,
+   "adaptive_measurable": 61,
+   "variants": {
+    "q8": {
+     "detected": 49,
+     "flips_by_threshold": {
+      "0.3": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.5": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.7": {
+       "lost": 0,
+       "gained": 0
+      }
+     },
+     "score_change_abs_median": 0.00016,
+     "score_change_abs_p95": 0.0144,
+     "score_change_abs_max": 0.021,
+     "det_shift_mm_max": 0.063,
+     "det_box_size_change_pct": {
+      "n": 54,
+      "abs_median": 0.115,
+      "abs_p95": 0.39,
+      "abs_max": 0.44,
+      "over_5": 0,
+      "over_10": 0
+     },
+     "false_positives": 15,
+     "fixed_threshold_vol_change_pct": {
+      "n": 50,
+      "abs_median": 0.0,
+      "abs_p95": 3.3,
+      "abs_max": 95.24,
+      "over_5": 1,
+      "over_10": 1
+     },
+     "adaptive_threshold_vol_change_pct": {
+      "n": 61,
+      "abs_median": 1.935,
+      "abs_p95": 7.52,
+      "abs_max": 9.37,
+      "over_5": 13,
+      "over_10": 0
+     },
+     "adaptive_vol_change_pct_regions_50mm3_plus": {
+      "n": 56,
+      "abs_median": 1.842,
+      "abs_p95": 7.35,
+      "abs_max": 9.37,
+      "over_5": 11,
+      "over_10": 0
+     },
+     "mean_hu_shift": {
+      "n": 50,
+      "abs_median": 0.5,
+      "abs_p95": 5.73,
+      "abs_max": 8.0,
+      "over_5": 3,
+      "over_10": 0
+     },
+     "adaptive_mean_hu_shift": {
+      "n": 61,
+      "abs_median": 0.12,
+      "abs_p95": 0.81,
+      "abs_max": 0.94,
+      "over_5": 0,
+      "over_10": 0
+     }
+    },
+    "j2k": {
+     "detected": 49,
+     "flips_by_threshold": {
+      "0.3": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.5": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.7": {
+       "lost": 0,
+       "gained": 0
+      }
+     },
+     "score_change_abs_median": 0.00025,
+     "score_change_abs_p95": 0.0142,
+     "score_change_abs_max": 0.0246,
+     "det_shift_mm_max": 0.08,
+     "det_box_size_change_pct": {
+      "n": 54,
+      "abs_median": 0.158,
+      "abs_p95": 0.49,
+      "abs_max": 1.37,
+      "over_5": 0,
+      "over_10": 0
+     },
+     "false_positives": 14,
+     "fixed_threshold_vol_change_pct": {
+      "n": 50,
+      "abs_median": 0.0,
+      "abs_p95": 4.91,
+      "abs_max": 300.0,
+      "over_5": 3,
+      "over_10": 2
+     },
+     "adaptive_threshold_vol_change_pct": {
+      "n": 61,
+      "abs_median": 0.438,
+      "abs_p95": 4.26,
+      "abs_max": 10.22,
+      "over_5": 2,
+      "over_10": 1
+     },
+     "adaptive_vol_change_pct_regions_50mm3_plus": {
+      "n": 56,
+      "abs_median": 0.503,
+      "abs_p95": 4.28,
+      "abs_max": 10.22,
+      "over_5": 2,
+      "over_10": 1
+     },
+     "mean_hu_shift": {
+      "n": 50,
+      "abs_median": 1.028,
+      "abs_p95": 9.55,
+      "abs_max": 11.0,
+      "over_5": 7,
+      "over_10": 1
+     },
+     "adaptive_mean_hu_shift": {
+      "n": 61,
+      "abs_median": 0.238,
+      "abs_p95": 0.98,
+      "abs_max": 4.0,
+      "over_5": 0,
+      "over_10": 0
+     }
+    },
+    "jxl": {
+     "detected": 49,
+     "flips_by_threshold": {
+      "0.3": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.5": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.7": {
+       "lost": 1,
+       "gained": 0
+      }
+     },
+     "score_change_abs_median": 0.00022,
+     "score_change_abs_p95": 0.0133,
+     "score_change_abs_max": 0.0454,
+     "det_shift_mm_max": 0.055,
+     "det_box_size_change_pct": {
+      "n": 54,
+      "abs_median": 0.133,
+      "abs_p95": 0.37,
+      "abs_max": 0.71,
+      "over_5": 0,
+      "over_10": 0
+     },
+     "false_positives": 15,
+     "fixed_threshold_vol_change_pct": {
+      "n": 50,
+      "abs_median": 0.0,
+      "abs_p95": 97.86,
+      "abs_max": 36300.0,
+      "over_5": 8,
+      "over_10": 7
+     },
+     "adaptive_threshold_vol_change_pct": {
+      "n": 61,
+      "abs_median": 0.613,
+      "abs_p95": 2.78,
+      "abs_max": 5.33,
+      "over_5": 1,
+      "over_10": 0
+     },
+     "adaptive_vol_change_pct_regions_50mm3_plus": {
+      "n": 56,
+      "abs_median": 0.55,
+      "abs_p95": 2.22,
+      "abs_max": 3.32,
+      "over_5": 0,
+      "over_10": 0
+     },
+     "mean_hu_shift": {
+      "n": 50,
+      "abs_median": 1.492,
+      "abs_p95": 7.95,
+      "abs_max": 12.0,
+      "over_5": 11,
+      "over_10": 1
+     },
+     "adaptive_mean_hu_shift": {
+      "n": 61,
+      "abs_median": 0.446,
+      "abs_p95": 1.29,
+      "abs_max": 1.83,
+      "over_5": 0,
+      "over_10": 0
+     }
+    }
+   }
+  },
+  "all": {
+   "nodules": 95,
+   "nodules_under_6mm": 34,
+   "diameter_min_median_max": [
+    3.4,
+    6.6,
+    22.2
+   ],
+   "detected_on_original": 76,
+   "orig_score_between_0.2_and_0.8": 16,
+   "false_positives_on_original": 34,
+   "adaptive_measurable": 95,
+   "variants": {
+    "q8": {
+     "detected": 76,
+     "flips_by_threshold": {
+      "0.3": {
+       "lost": 0,
+       "gained": 1
+      },
+      "0.5": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.7": {
+       "lost": 1,
+       "gained": 0
+      }
+     },
+     "score_change_abs_median": 0.0002,
+     "score_change_abs_p95": 0.0147,
+     "score_change_abs_max": 0.021,
+     "det_shift_mm_max": 0.063,
+     "det_box_size_change_pct": {
+      "n": 87,
+      "abs_median": 0.106,
+      "abs_p95": 0.37,
+      "abs_max": 0.44,
+      "over_5": 0,
+      "over_10": 0
+     },
+     "false_positives": 34,
+     "fixed_threshold_vol_change_pct": {
+      "n": 83,
+      "abs_median": 0.0,
+      "abs_p95": 9.05,
+      "abs_max": 95.24,
+      "over_5": 5,
+      "over_10": 4
+     },
+     "adaptive_threshold_vol_change_pct": {
+      "n": 95,
+      "abs_median": 1.961,
+      "abs_p95": 7.53,
+      "abs_max": 100.0,
+      "over_5": 16,
+      "over_10": 2
+     },
+     "adaptive_vol_change_pct_regions_50mm3_plus": {
+      "n": 82,
+      "abs_median": 1.842,
+      "abs_p95": 7.28,
+      "abs_max": 10.19,
+      "over_5": 12,
+      "over_10": 1
+     },
+     "mean_hu_shift": {
+      "n": 83,
+      "abs_median": 0.463,
+      "abs_p95": 4.22,
+      "abs_max": 8.0,
+      "over_5": 3,
+      "over_10": 0
+     },
+     "adaptive_mean_hu_shift": {
+      "n": 95,
+      "abs_median": 0.169,
+      "abs_p95": 0.73,
+      "abs_max": 0.94,
+      "over_5": 0,
+      "over_10": 0
+     }
+    },
+    "j2k": {
+     "detected": 76,
+     "flips_by_threshold": {
+      "0.3": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.5": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.7": {
+       "lost": 1,
+       "gained": 0
+      }
+     },
+     "score_change_abs_median": 0.00039,
+     "score_change_abs_p95": 0.0137,
+     "score_change_abs_max": 0.0246,
+     "det_shift_mm_max": 0.08,
+     "det_box_size_change_pct": {
+      "n": 87,
+      "abs_median": 0.136,
+      "abs_p95": 0.46,
+      "abs_max": 1.37,
+      "over_5": 0,
+      "over_10": 0
+     },
+     "false_positives": 34,
+     "fixed_threshold_vol_change_pct": {
+      "n": 83,
+      "abs_median": 0.0,
+      "abs_p95": 7.81,
+      "abs_max": 300.0,
+      "over_5": 8,
+      "over_10": 3
+     },
+     "adaptive_threshold_vol_change_pct": {
+      "n": 95,
+      "abs_median": 0.438,
+      "abs_p95": 4.29,
+      "abs_max": 100.0,
+      "over_5": 4,
+      "over_10": 2
+     },
+     "adaptive_vol_change_pct_regions_50mm3_plus": {
+      "n": 82,
+      "abs_median": 0.467,
+      "abs_p95": 4.25,
+      "abs_max": 10.22,
+      "over_5": 3,
+      "over_10": 1
+     },
+     "mean_hu_shift": {
+      "n": 83,
+      "abs_median": 0.679,
+      "abs_p95": 7.87,
+      "abs_max": 11.0,
+      "over_5": 7,
+      "over_10": 1
+     },
+     "adaptive_mean_hu_shift": {
+      "n": 95,
+      "abs_median": 0.275,
+      "abs_p95": 1.27,
+      "abs_max": 4.0,
+      "over_5": 0,
+      "over_10": 0
+     }
+    },
+    "jxl": {
+     "detected": 76,
+     "flips_by_threshold": {
+      "0.3": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.5": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.7": {
+       "lost": 2,
+       "gained": 0
+      }
+     },
+     "score_change_abs_median": 0.00022,
+     "score_change_abs_p95": 0.0111,
+     "score_change_abs_max": 0.0454,
+     "det_shift_mm_max": 0.055,
+     "det_box_size_change_pct": {
+      "n": 87,
+      "abs_median": 0.104,
+      "abs_p95": 0.4,
+      "abs_max": 0.71,
+      "over_5": 0,
+      "over_10": 0
+     },
+     "false_positives": 34,
+     "fixed_threshold_vol_change_pct": {
+      "n": 83,
+      "abs_median": 0.294,
+      "abs_p95": 93.71,
+      "abs_max": 36300.0,
+      "over_5": 15,
+      "over_10": 11
+     },
+     "adaptive_threshold_vol_change_pct": {
+      "n": 95,
+      "abs_median": 0.648,
+      "abs_p95": 3.44,
+      "abs_max": 5.33,
+      "over_5": 2,
+      "over_10": 0
+     },
+     "adaptive_vol_change_pct_regions_50mm3_plus": {
+      "n": 82,
+      "abs_median": 0.508,
+      "abs_p95": 2.76,
+      "abs_max": 5.28,
+      "over_5": 1,
+      "over_10": 0
+     },
+     "mean_hu_shift": {
+      "n": 83,
+      "abs_median": 1.203,
+      "abs_p95": 6.47,
+      "abs_max": 12.0,
+      "over_5": 11,
+      "over_10": 1
+     },
+     "adaptive_mean_hu_shift": {
+      "n": 95,
+      "abs_median": 0.466,
+      "abs_p95": 1.3,
+      "abs_max": 2.23,
+      "over_5": 0,
+      "over_10": 0
+     }
+    }
+   }
+  },
+  "part-solid": {
+   "nodules": 34,
+   "nodules_under_6mm": 15,
+   "diameter_min_median_max": [
+    3.4,
+    6.2,
+    22.2
+   ],
+   "detected_on_original": 27,
+   "orig_score_between_0.2_and_0.8": 5,
+   "false_positives_on_original": 19,
+   "adaptive_measurable": 34,
+   "variants": {
+    "q8": {
+     "detected": 27,
+     "flips_by_threshold": {
+      "0.3": {
+       "lost": 0,
+       "gained": 1
+      },
+      "0.5": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.7": {
+       "lost": 1,
+       "gained": 0
+      }
+     },
+     "score_change_abs_median": 0.00021,
+     "score_change_abs_p95": 0.0134,
+     "score_change_abs_max": 0.0164,
+     "det_shift_mm_max": 0.017,
+     "det_box_size_change_pct": {
+      "n": 33,
+      "abs_median": 0.101,
+      "abs_p95": 0.31,
+      "abs_max": 0.34,
+      "over_5": 0,
+      "over_10": 0
+     },
+     "false_positives": 19,
+     "fixed_threshold_vol_change_pct": {
+      "n": 33,
+      "abs_median": 0.995,
+      "abs_p95": 14.26,
+      "abs_max": 25.0,
+      "over_5": 4,
+      "over_10": 3
+     },
+     "adaptive_threshold_vol_change_pct": {
+      "n": 34,
+      "abs_median": 1.978,
+      "abs_p95": 7.57,
+      "abs_max": 100.0,
+      "over_5": 3,
+      "over_10": 2
+     },
+     "adaptive_vol_change_pct_regions_50mm3_plus": {
+      "n": 26,
+      "abs_median": 1.859,
+      "abs_p95": 4.66,
+      "abs_max": 10.19,
+      "over_5": 1,
+      "over_10": 1
+     },
+     "mean_hu_shift": {
+      "n": 33,
+      "abs_median": 0.293,
+      "abs_p95": 1.42,
+      "abs_max": 4.25,
+      "over_5": 0,
+      "over_10": 0
+     },
+     "adaptive_mean_hu_shift": {
+      "n": 34,
+      "abs_median": 0.254,
+      "abs_p95": 0.67,
+      "abs_max": 0.75,
+      "over_5": 0,
+      "over_10": 0
+     }
+    },
+    "j2k": {
+     "detected": 27,
+     "flips_by_threshold": {
+      "0.3": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.5": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.7": {
+       "lost": 1,
+       "gained": 0
+      }
+     },
+     "score_change_abs_median": 0.00058,
+     "score_change_abs_p95": 0.0066,
+     "score_change_abs_max": 0.0231,
+     "det_shift_mm_max": 0.071,
+     "det_box_size_change_pct": {
+      "n": 33,
+      "abs_median": 0.092,
+      "abs_p95": 0.42,
+      "abs_max": 0.65,
+      "over_5": 0,
+      "over_10": 0
+     },
+     "false_positives": 20,
+     "fixed_threshold_vol_change_pct": {
+      "n": 33,
+      "abs_median": 0.399,
+      "abs_p95": 7.98,
+      "abs_max": 11.76,
+      "over_5": 5,
+      "over_10": 1
+     },
+     "adaptive_threshold_vol_change_pct": {
+      "n": 34,
+      "abs_median": 0.452,
+      "abs_p95": 5.12,
+      "abs_max": 100.0,
+      "over_5": 2,
+      "over_10": 1
+     },
+     "adaptive_vol_change_pct_regions_50mm3_plus": {
+      "n": 26,
+      "abs_median": 0.452,
+      "abs_p95": 3.61,
+      "abs_max": 6.79,
+      "over_5": 1,
+      "over_10": 0
+     },
+     "mean_hu_shift": {
+      "n": 33,
+      "abs_median": 0.455,
+      "abs_p95": 1.77,
+      "abs_max": 2.79,
+      "over_5": 0,
+      "over_10": 0
+     },
+     "adaptive_mean_hu_shift": {
+      "n": 34,
+      "abs_median": 0.38,
+      "abs_p95": 1.77,
+      "abs_max": 2.55,
+      "over_5": 0,
+      "over_10": 0
+     }
+    },
+    "jxl": {
+     "detected": 27,
+     "flips_by_threshold": {
+      "0.3": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.5": {
+       "lost": 0,
+       "gained": 0
+      },
+      "0.7": {
+       "lost": 1,
+       "gained": 0
+      }
+     },
+     "score_change_abs_median": 0.00032,
+     "score_change_abs_p95": 0.0087,
+     "score_change_abs_max": 0.0122,
+     "det_shift_mm_max": 0.055,
+     "det_box_size_change_pct": {
+      "n": 33,
+      "abs_median": 0.073,
+      "abs_p95": 0.43,
+      "abs_max": 0.56,
+      "over_5": 0,
+      "over_10": 0
+     },
+     "false_positives": 19,
+     "fixed_threshold_vol_change_pct": {
+      "n": 33,
+      "abs_median": 0.746,
+      "abs_p95": 44.0,
+      "abs_max": 98.08,
+      "over_5": 7,
+      "over_10": 4
+     },
+     "adaptive_threshold_vol_change_pct": {
+      "n": 34,
+      "abs_median": 0.693,
+      "abs_p95": 4.6,
+      "abs_max": 5.28,
+      "over_5": 1,
+      "over_10": 0
+     },
+     "adaptive_vol_change_pct_regions_50mm3_plus": {
+      "n": 26,
+      "abs_median": 0.43,
+      "abs_p95": 3.27,
+      "abs_max": 5.28,
+      "over_5": 1,
+      "over_10": 0
+     },
+     "mean_hu_shift": {
+      "n": 33,
+      "abs_median": 0.795,
+      "abs_p95": 2.73,
+      "abs_max": 4.8,
+      "over_5": 0,
+      "over_10": 0
+     },
+     "adaptive_mean_hu_shift": {
+      "n": 34,
+      "abs_median": 0.475,
+      "abs_p95": 1.26,
+      "abs_max": 2.23,
+      "over_5": 0,
+      "over_10": 0
+     }
+    }
+   }
+  }
+ }
+}
