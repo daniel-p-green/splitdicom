@@ -1,0 +1,263 @@
+{
+ "chest2mm": {
+  "slices": 143,
+  "bits": 13,
+  "lossless_jxl_ratio": null,
+  "variants": {
+   "q4": {
+    "bytes": 15019986,
+    "ratio": 4.99,
+    "setting": null,
+    "max_abs_err": 4,
+    "p999_abs_err": 4.0,
+    "rmse": 2.288,
+    "pixels_over_8_pct": 0.0,
+    "pixels_over_16_pct": 0.0
+   },
+   "q8": {
+    "bytes": 11738258,
+    "ratio": 6.39,
+    "setting": null,
+    "max_abs_err": 8,
+    "p999_abs_err": 8.0,
+    "rmse": 4.341,
+    "pixels_over_8_pct": 0.0,
+    "pixels_over_16_pct": 0.0
+   },
+   "j2k_4": {
+    "bytes": 15001358,
+    "ratio": 5.0,
+    "setting": 67.1919850442341,
+    "max_abs_err": 21,
+    "p999_abs_err": 12.0,
+    "rmse": 3.432,
+    "pixels_over_8_pct": 1.9865,
+    "pixels_over_16_pct": 0.00059
+   },
+   "j2k_8": {
+    "bytes": 11736243,
+    "ratio": 6.39,
+    "setting": 62.47209628912568,
+    "max_abs_err": 48,
+    "p999_abs_err": 22.0,
+    "rmse": 6.068,
+    "pixels_over_8_pct": 16.608,
+    "pixels_over_16_pct": 1.23153
+   },
+   "htj2k_4": {
+    "bytes": 15024351,
+    "ratio": 4.99,
+    "setting": 0.001402331165519591,
+    "max_abs_err": 26,
+    "p999_abs_err": 15.0,
+    "rmse": 4.096,
+    "pixels_over_8_pct": 5.06,
+    "pixels_over_16_pct": 0.03032
+   },
+   "htj2k_8": {
+    "bytes": 11759687,
+    "ratio": 6.38,
+    "setting": 0.0022166806233466863,
+    "max_abs_err": 42,
+    "p999_abs_err": 25.0,
+    "rmse": 6.943,
+    "pixels_over_8_pct": 21.6385,
+    "pixels_over_16_pct": 2.7147
+   },
+   "jxl_4": {
+    "bytes": 15010053,
+    "ratio": 4.99,
+    "setting": 0.08051858155515469,
+    "max_abs_err": 45,
+    "p999_abs_err": 18.0,
+    "rmse": 3.86,
+    "pixels_over_8_pct": 4.5946,
+    "pixels_over_16_pct": 0.16091
+   },
+   "jxl_8": {
+    "bytes": 11752964,
+    "ratio": 6.38,
+    "setting": 0.13871315604949694,
+    "max_abs_err": 71,
+    "p999_abs_err": 28.0,
+    "rmse": 6.386,
+    "pixels_over_8_pct": 16.8797,
+    "pixels_over_16_pct": 2.37932
+   }
+  }
+ },
+ "wbtorso": {
+  "slices": 174,
+  "bits": 12,
+  "lossless_jxl_ratio": null,
+  "variants": {
+   "q4": {
+    "bytes": 15035584,
+    "ratio": 6.07,
+    "setting": null,
+    "max_abs_err": 4,
+    "p999_abs_err": 4.0,
+    "rmse": 2.278,
+    "pixels_over_8_pct": 0.0,
+    "pixels_over_16_pct": 0.0
+   },
+   "q8": {
+    "bytes": 11182056,
+    "ratio": 8.16,
+    "setting": null,
+    "max_abs_err": 8,
+    "p999_abs_err": 8.0,
+    "rmse": 4.328,
+    "pixels_over_8_pct": 0.0,
+    "pixels_over_16_pct": 0.0
+   },
+   "j2k_4": {
+    "bytes": 15038937,
+    "ratio": 6.07,
+    "setting": 63.048625655794204,
+    "max_abs_err": 20,
+    "p999_abs_err": 11.0,
+    "rmse": 2.838,
+    "pixels_over_8_pct": 0.7088,
+    "pixels_over_16_pct": 3e-05
+   },
+   "j2k_8": {
+    "bytes": 11181530,
+    "ratio": 8.16,
+    "setting": 58.26825735749286,
+    "max_abs_err": 39,
+    "p999_abs_err": 19.0,
+    "rmse": 4.93,
+    "pixels_over_8_pct": 9.6108,
+    "pixels_over_16_pct": 0.38768
+   },
+   "htj2k_4": {
+    "bytes": 15034720,
+    "ratio": 6.07,
+    "setting": 0.002114439739604001,
+    "max_abs_err": 21,
+    "p999_abs_err": 12.0,
+    "rmse": 3.205,
+    "pixels_over_8_pct": 1.5187,
+    "pixels_over_16_pct": 0.00036
+   },
+   "htj2k_8": {
+    "bytes": 11189433,
+    "ratio": 8.15,
+    "setting": 0.0033366866956463298,
+    "max_abs_err": 31,
+    "p999_abs_err": 19.0,
+    "rmse": 5.276,
+    "pixels_over_8_pct": 11.9632,
+    "pixels_over_16_pct": 0.42759
+   },
+   "jxl_4": {
+    "bytes": 15029844,
+    "ratio": 6.07,
+    "setting": 0.2806925596627475,
+    "max_abs_err": 92,
+    "p999_abs_err": 32.0,
+    "rmse": 4.973,
+    "pixels_over_8_pct": 8.2069,
+    "pixels_over_16_pct": 1.85009
+   },
+   "jxl_8": {
+    "bytes": 11182070,
+    "ratio": 8.16,
+    "setting": 0.46833547316522156,
+    "max_abs_err": 153,
+    "p999_abs_err": 48.0,
+    "rmse": 7.92,
+    "pixels_over_8_pct": 16.0591,
+    "pixels_over_16_pct": 5.91213
+   }
+  }
+ },
+ "petct375": {
+  "slices": 135,
+  "bits": 13,
+  "lossless_jxl_ratio": null,
+  "variants": {
+   "q4": {
+    "bytes": 9710903,
+    "ratio": 7.29,
+    "setting": null,
+    "max_abs_err": 4,
+    "p999_abs_err": 4.0,
+    "rmse": 2.283,
+    "pixels_over_8_pct": 0.0,
+    "pixels_over_16_pct": 0.0
+   },
+   "q8": {
+    "bytes": 7096800,
+    "ratio": 9.97,
+    "setting": null,
+    "max_abs_err": 8,
+    "p999_abs_err": 8.0,
+    "rmse": 4.339,
+    "pixels_over_8_pct": 0.0,
+    "pixels_over_16_pct": 0.0
+   },
+   "j2k_4": {
+    "bytes": 9716189,
+    "ratio": 7.28,
+    "setting": 67.87884873490883,
+    "max_abs_err": 25,
+    "p999_abs_err": 13.0,
+    "rmse": 3.292,
+    "pixels_over_8_pct": 1.7299,
+    "pixels_over_16_pct": 0.00676
+   },
+   "j2k_8": {
+    "bytes": 7097105,
+    "ratio": 9.97,
+    "setting": 63.609603052416524,
+    "max_abs_err": 40,
+    "p999_abs_err": 21.0,
+    "rmse": 5.443,
+    "pixels_over_8_pct": 12.6627,
+    "pixels_over_16_pct": 0.63625
+   },
+   "htj2k_4": {
+    "bytes": 9713442,
+    "ratio": 7.29,
+    "setting": 0.0013009416336228787,
+    "max_abs_err": 24,
+    "p999_abs_err": 15.0,
+    "rmse": 3.92,
+    "pixels_over_8_pct": 4.1837,
+    "pixels_over_16_pct": 0.02291
+   },
+   "htj2k_8": {
+    "bytes": 7097953,
+    "ratio": 9.97,
+    "setting": 0.00216313192914335,
+    "max_abs_err": 43,
+    "p999_abs_err": 23.0,
+    "rmse": 6.228,
+    "pixels_over_8_pct": 17.361,
+    "pixels_over_16_pct": 1.51997
+   },
+   "jxl_4": {
+    "bytes": 9717971,
+    "ratio": 7.28,
+    "setting": 0.05917348055387169,
+    "max_abs_err": 31,
+    "p999_abs_err": 13.0,
+    "rmse": 3.225,
+    "pixels_over_8_pct": 1.9417,
+    "pixels_over_16_pct": 0.01304
+   },
+   "jxl_8": {
+    "bytes": 7091734,
+    "ratio": 9.98,
+    "setting": 0.11290961473817622,
+    "max_abs_err": 67,
+    "p999_abs_err": 23.0,
+    "rmse": 5.328,
+    "pixels_over_8_pct": 11.5658,
+    "pixels_over_16_pct": 0.88118
+   }
+  }
+ }
+}

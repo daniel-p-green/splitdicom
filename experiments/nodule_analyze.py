@@ -1,5 +1,5 @@
 """Summarise nodule_test.py output, overall and by radiologist texture group when present.
-usage: nodule_analyze.py <nodules.jsonl> <summary.json>"""
+usage: nodule_analyze.py <nodules.jsonl> <summary.json> [variant,variant,...]"""
 import sys, json, collections
 import numpy as np
 
@@ -75,6 +75,8 @@ def summarise(rows, used):
 
 
 def main():
+    global VARS
+    if len(sys.argv) > 3: VARS = sys.argv[3].split(",")      # variants to compare with "orig"
     scans = [json.loads(l) for l in open(sys.argv[1]) if l.strip()]
     used = [s for s in scans if "nodules" in s]; skipped = [s for s in scans if "skipped" in s]
     groups = collections.defaultdict(list)
